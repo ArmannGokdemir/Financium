@@ -6,7 +6,17 @@ import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 
-export default async function () {
+export default async function Page({
+  //Page components accept a prop called searchParams, so you can pass the current URL params to the <Table> component.
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -16,11 +26,16 @@ export default async function () {
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-      {/*<Suspense key={query+currentPage} fallback={<InvoicesTableSkeleton/>}>
+      {
+        <Suspense
+          key={query + currentPage} // key here is used for optimizing rendering if its not used component skeleton wont be rendered
+          fallback={<InvoicesTableSkeleton />}
+        >
           <Table query={query} currentPage={currentPage} />
-  </Suspense>*/}
+        </Suspense>
+      }
       <div className="mt-5 flex w-full justify-center">
-        {/*<Pagination totalPages={totalPages}/>*/}
+        {/* {<Pagination totalPages={totalPages} />} */}
       </div>
     </div>
   );
