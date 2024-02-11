@@ -15,9 +15,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState = { message: null, errors: {} }; //The initialState can be anything you define, in this case, create an object with two empty keys: message and errors
   const [state, dispatch] = useFormState(createInvoice, initialState);
   const { message } = state;
-  console.log(
-    JSON.stringify(state).split(',')[3].split(':')[1].replace('}', ''),
-  );
+
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -138,9 +136,9 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           {
             <p className="mt-2 text-sm text-red-500" key={2}>
               {JSON.stringify(state)
-                .split(',')[3]
-                .split(':')[1]
-                .replace('}', '')
+                ?.split(',')[3]
+                ?.split(':')[1]
+                ?.replace('}', '')
                 .replaceAll('"', '')}
             </p>
           }
