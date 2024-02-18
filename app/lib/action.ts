@@ -88,10 +88,12 @@ export async function updateInvoice(
 
   try {
     await sql`
-  UPDATE invoices
-  SET customer_id=${customerId},amount=${amountInCents},status${status}
-  WHERE id = ${id}`;
+    UPDATE invoices
+    SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+    WHERE id = ${id}
+  `;
   } catch (error) {
+    console.error('id: ', id, error);
     return { message: 'Database Error:Failed to Update Invoice' };
   }
   revalidatePath('/dashboard/invoices'); // to clear the client cache and make a new server request.

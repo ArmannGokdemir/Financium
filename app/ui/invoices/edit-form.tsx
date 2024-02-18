@@ -149,7 +149,7 @@ export default function EditInvoiceForm({
                   ?.split(',')[1]
                   ?.split(':')[1]
                   .replace('}', '')
-                  .replaceAll('"', '')}
+                  .replaceAll('"', '') && ''}
               </p>
             }
           </div>
